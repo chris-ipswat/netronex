@@ -18,8 +18,6 @@
 
         :root {
             --bg: #0a0a0f;
-            --surface: #12121a;
-            --border: rgba(255, 255, 255, 0.06);
             --text: #e4e4e7;
             --text-muted: #71717a;
             --accent: #6366f1;
@@ -70,14 +68,13 @@
             z-index: 1;
             text-align: center;
             padding: 2rem;
-            max-width: 560px;
         }
 
         .logo {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 3rem;
             animation: fadeDown 0.8s ease-out;
         }
 
@@ -92,111 +89,34 @@
             letter-spacing: -0.02em;
         }
 
-        .badge {
-            display: inline-block;
-            padding: 0.35rem 1rem;
-            border-radius: 100px;
-            border: 1px solid var(--border);
-            background: var(--surface);
-            color: var(--text-muted);
-            font-size: 0.75rem;
-            font-weight: 500;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            margin-bottom: 2rem;
-            animation: fadeDown 0.8s ease-out 0.1s both;
-        }
-
         h1 {
-            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-size: clamp(2.2rem, 6vw, 3.8rem);
             font-weight: 300;
             line-height: 1.2;
             letter-spacing: -0.03em;
-            margin-bottom: 1.25rem;
-            animation: fadeDown 0.8s ease-out 0.2s both;
+            animation: fadeDown 0.8s ease-out 0.15s both;
         }
 
-        h1 strong {
+        h1 .soon {
             font-weight: 600;
-            background: linear-gradient(135deg, var(--text) 0%, var(--accent) 100%);
+            background: linear-gradient(135deg, #e4e4e7, #6366f1, #818cf8, #6366f1, #e4e4e7);
+            background-size: 300% 300%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            animation: gradientShift 6s ease-in-out infinite;
         }
 
-        .subtitle {
-            font-size: 1.05rem;
-            color: var(--text-muted);
-            line-height: 1.6;
-            margin-bottom: 3rem;
-            font-weight: 300;
-            animation: fadeDown 0.8s ease-out 0.3s both;
-        }
-
-        .notify-form {
-            display: flex;
-            gap: 0.5rem;
-            max-width: 420px;
-            margin: 0 auto;
-            animation: fadeDown 0.8s ease-out 0.4s both;
-        }
-
-        .notify-form input {
-            flex: 1;
-            padding: 0.8rem 1.1rem;
-            border-radius: 10px;
-            border: 1px solid var(--border);
-            background: var(--surface);
-            color: var(--text);
-            font-family: inherit;
-            font-size: 0.9rem;
-            outline: none;
-            transition: border-color 0.2s;
-        }
-
-        .notify-form input::placeholder {
-            color: var(--text-muted);
-        }
-
-        .notify-form input:focus {
-            border-color: var(--accent);
-        }
-
-        .notify-form button {
-            padding: 0.8rem 1.5rem;
-            border-radius: 10px;
-            border: none;
-            background: var(--accent);
-            color: #fff;
-            font-family: inherit;
-            font-size: 0.9rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: opacity 0.2s, transform 0.2s;
-            white-space: nowrap;
-        }
-
-        .notify-form button:hover {
-            opacity: 0.9;
-            transform: translateY(-1px);
-        }
-
-        .notify-form button:active {
-            transform: translateY(0);
-        }
-
-        .form-success {
-            display: none;
-            color: var(--accent);
-            font-size: 0.9rem;
-            font-weight: 400;
-            max-width: 420px;
-            margin: 0 auto;
-            animation: fadeDown 0.4s ease-out;
-        }
-
-        .form-success.show {
-            display: block;
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
         }
 
         footer {
@@ -209,7 +129,7 @@
             font-size: 0.75rem;
             letter-spacing: 0.02em;
             z-index: 1;
-            animation: fadeDown 0.8s ease-out 0.5s both;
+            animation: fadeDown 0.8s ease-out 0.3s both;
         }
 
         /* Floating nodes animation */
@@ -257,16 +177,6 @@
                 transform: translateY(-20vh) scale(1);
             }
         }
-
-        @media (max-width: 480px) {
-            .notify-form {
-                flex-direction: column;
-            }
-
-            .notify-form button {
-                padding: 0.9rem;
-            }
-        }
     </style>
 </head>
 <body>
@@ -290,26 +200,12 @@
             <span class="logo-text">netronex</span>
         </div>
 
-        <br>
-
-        <div class="badge">Coming Soon</div>
-
-        <h1>Something <strong>big</strong> is on its way</h1>
-
-        <p class="subtitle">We're building the future of networking. Be the first to know when we launch.</p>
-
-        <form class="notify-form" id="notifyForm">
-            <input type="email" placeholder="Enter your email" required autocomplete="email">
-            <button type="submit">Notify Me</button>
-        </form>
-
-        <p class="form-success" id="formSuccess">You're on the list. We'll be in touch.</p>
+        <h1>Coming <span class="soon">soon</span></h1>
     </div>
 
     <footer>&copy; 2026 Netronex. All rights reserved.</footer>
 
     <script>
-        // Floating nodes
         const nodesContainer = document.getElementById('nodes');
         for (let i = 0; i < 15; i++) {
             const node = document.createElement('div');
@@ -320,13 +216,6 @@
             node.style.width = node.style.height = (2 + Math.random() * 3) + 'px';
             nodesContainer.appendChild(node);
         }
-
-        // Form handler (placeholder — swap for real backend)
-        document.getElementById('notifyForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            this.style.display = 'none';
-            document.getElementById('formSuccess').classList.add('show');
-        });
     </script>
 </body>
 </html>
